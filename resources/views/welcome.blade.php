@@ -209,6 +209,9 @@
                 data: { products: products },
 
                 beforeSend: function () {
+                    $("#placeOrderBtn")
+                    .prop('disabled', true)
+                    .text('Placing Order...');
 
                     Swal.fire({
                         title: 'Placing Order...',
@@ -262,7 +265,9 @@
 
                 complete: function () {
 
-                    $("#placeOrderBtn").prop('disabled', false);
+                    $("#placeOrderBtn")
+                    .prop('disabled', false)
+                    .text('Place Order');
 
                 }
 

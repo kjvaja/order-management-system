@@ -177,6 +177,9 @@
         $(document).on('click', '.viewOrder', function () {
 
             let orderId = $(this).data('id');
+            let button = $(this);
+
+            button.prop('disabled', true).text('Loading...');
 
             $.ajax({
 
@@ -220,13 +223,27 @@
                     `;
 
                     Swal.fire({
-
                         title: 'Order #' + order.id,
                         html: table,
                         width: 700,
                         confirmButtonColor: '#ffc107'
-
                     });
+
+                },
+
+                error: function () {
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Unable to load order details'
+                    });
+
+                },
+
+                complete: function () {
+
+                    button.prop('disabled', false).text('View');
 
                 }
 
